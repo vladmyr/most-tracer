@@ -1,0 +1,20 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "alwaysStrict": true,
+    "outDir": "./dist",
+    "module": "commonjs",
+    "target": "es5",
+    "sourceMap": true,
+    "inlineSources": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "removeComments": true,
+    "lib": ["esnext"]
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
