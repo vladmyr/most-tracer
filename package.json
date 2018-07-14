@@ -8,10 +8,13 @@
     "most": "^1.7.3"
   },
   "devDependencies": {
+    "ava": "^0.25.0",
+    "ts-node": "^7.0.0",
     "typescript": "latest"
   },
   "scripts": {
-    "tsc": "./node_modules/.bin/tsc"
+    "tsc": "./node_modules/.bin/tsc",
+    "test": "tsc && ava -v"
   },
   "author": "Volodymyr Khytskyi",
   "license": "MIT"

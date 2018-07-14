@@ -12,6 +12,19 @@
             "outFiles": ["${workspaceFolder}/dist/**/*"],
             "sourceMaps": true,
             "preLaunchTask": "tsc"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "test",
+            "program": "${workspaceRoot}/node_modules/ava/profile.js",
+            "args": [
+                "--serial",
+                "${file}"
+            ],
+            "skipFiles": [
+                "<node_internals>/**/*.js"
+            ]
         }
     ]
 }
