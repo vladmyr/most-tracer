@@ -1,6 +1,5 @@
-const sayHello = function sayHello(helloTo: string): string {
-  return `Hello, ${helloTo}`;
-};
+import { just } from "./Tracables/Source/Core"
 
-console.log(sayHello('world'));
-process.exit(0);
+const const$ = just(0).constant(true);
+
+const$.observe(x => console.log("const.observe", x));

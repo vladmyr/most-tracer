@@ -1,15 +1,8 @@
-import { of, empty, never } from "most/src/source/core";
+import { of, empty, never } from "most";
+import StreamT from "../StreamT";
 
-const ofT = function ofT(x: any) {
+const ofT: typeof of = <T>(...args: any[]) => new StreamT<T>(of.apply(of, args));
+const emptyT: typeof empty = () => new StreamT<any>(empty.call(empty));
+const neverT: typeof never = () => new StreamT<any>(never.call(never));
 
-}
-
-const emptyT = function emptyT() {
-
-}
-
-const neverT = function neverT() {
-
-}
-
-export { ofT, emptyT, neverT }
+export { ofT as of, ofT as just, emptyT as empty, neverT as never }
