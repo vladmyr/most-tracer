@@ -1,10 +1,11 @@
 {
-  "name": "node-ts",
-  "version": "1.0.1",
+  "name": "most-tracer",
+  "version": "0.0.1",
   "description": "Node.js + TypeScript = Node.ts boilerplate",
   "main": "index.ts",
   "dependencies": {
     "@types/node": "^10.3.6",
+    "ava-ts": "^0.24.6",
     "most": "^1.7.3"
   },
   "devDependencies": {
@@ -14,7 +15,7 @@
   },
   "scripts": {
     "tsc": "./node_modules/.bin/tsc",
-    "test": "tsc && ava -v"
+    "test": "ava-ts -v ./test/**/*.test.ts"
   },
   "author": "Volodymyr Khytskyi",
   "license": "MIT"

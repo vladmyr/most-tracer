@@ -5,9 +5,9 @@ export default {
         "ts-node/register"
     ],
     files: [
-        "test/**/*.ts"
+        "./test/**/*.test.ts"
     ],
     sources: [
-        "src/**/*.ts"
+        "./src/**/*.ts"
     ]
 }

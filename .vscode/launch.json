@@ -17,7 +17,8 @@
             "type": "node",
             "request": "launch",
             "name": "test",
-            "program": "${workspaceRoot}/node_modules/ava/profile.js",
+            "program": "${workspaceRoot}/node_modules/ava-ts/profile.js",
+            "localRoot": "${workspaceRoot}",
             "args": [
                 "--serial",
                 "${file}"
