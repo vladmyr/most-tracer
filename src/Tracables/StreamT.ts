@@ -1,14 +1,6 @@
 import { Stream } from "most";
 
 class StreamT<T> extends Stream<T> {
-    // public static of(x: any) {
-    //     return 
-    // }
-
-    // public static empty() {}
-
-    // public static from() {}
-
     private _patch<T>(methodName: string, args: any[]) {
         // @ts-ignore
         const method = super[methodName]
