@@ -1,8 +1,12 @@
-import { of, empty, never } from "most";
+import { of as _of, empty as _empty, never as _never } from "most";
 import StreamT from "../StreamT";
 
-const ofT: typeof of = <T>(...args: any[]) => new StreamT<T>(of.apply(of, args));
-const emptyT: typeof empty = () => new StreamT<any>(empty.call(empty));
-const neverT: typeof never = () => new StreamT<any>(never.call(never));
+const ofT = <T>(...args: any[]) => new StreamT<T>(_of.apply(_of, args));
+const emptyT = () => new StreamT<any>(_empty.call(_empty));
+const neverT = () => new StreamT<any>(_never.call(_never));
 
-export { ofT as of, ofT as just, emptyT as empty, neverT as never }
+const of: typeof _of = ofT;
+const empty: typeof _empty = emptyT;
+const never: typeof _never = neverT;
+
+export { ofT, of, emptyT, empty, neverT, never, ofT as justT, of as just };

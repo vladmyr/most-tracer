@@ -1,9 +1,9 @@
 import test from "ava";
 import { of } from "most";
 
-import { of as ofT } from "../src/Tracables/Source/Core";
+import { of as ofT } from "../../src/Tracables/Source/Core";
 
-import StreamTestHelper from "./Helpers/StreamTestHelper";
+import StreamTestHelper from "../Helpers/StreamTestHelper";
 
 test("most.of alias most.just", async(t) => {
     const original$ = of("hello")

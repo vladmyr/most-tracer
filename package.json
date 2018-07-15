@@ -5,8 +5,10 @@
   "main": "index.ts",
   "dependencies": {
     "@types/node": "^10.3.6",
+    "@types/uuid": "^3.4.3",
     "ava-ts": "^0.24.6",
-    "most": "^1.7.3"
+    "most": "^1.7.3",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "ava": "^0.25.0",

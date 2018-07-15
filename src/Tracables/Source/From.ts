@@ -1,8 +1,9 @@
-import { from } from "most";
+import { from as _from } from "most";
 import StreamT from "../StreamT";
 
-const fromT: typeof from = <T>(...args: any[]) => {
-    return new StreamT<T>(from.apply(from, args));
+const fromT = <T>(...args: any[]) => {
+    return new StreamT<T>(_from.apply(_from, args));
 }
+const from: typeof _from = fromT;
 
-export default fromT;
+export { fromT, from };

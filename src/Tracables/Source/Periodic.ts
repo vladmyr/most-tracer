@@ -1,7 +1,9 @@
-import { periodic } from "most";
+import { periodic as _periodic } from "most";
 import StreamT from "../StreamT";
 
-const periodicT: typeof periodic = <T>(...args: any[]) =>
-    new StreamT<T>(periodic.apply(periodic, args));
+const periodicT = <T>(...args: any[]) =>
+    new StreamT<T>(_periodic.apply(_periodic, args));
 
-export { periodicT as periodic }
+const periodic: typeof _periodic = periodicT;
+
+export { periodic, periodicT }

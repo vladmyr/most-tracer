@@ -29,9 +29,9 @@ Visualize and trace your most.js streams
     - [x] `timestamp`
     - [x] `tap`
 1. Filtering streams
-    - [ ] `filter`
-    - [ ] `skipRepeats`
-    - [ ] `skipRepeatsWith`
+    - [x] `filter`
+    - [x] `skipRepeats`
+    - [x] `skipRepeatsWith`
 1. Transducer support
     - [ ] `transduce`
 1. Slicing streams
