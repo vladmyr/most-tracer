@@ -22,13 +22,8 @@ class StreamT<T> extends Stream<T> {
         this._treeNode = new TreeNode(this, parentStreamT);
 
         StreamSet.Add(this);
-    }
 
-    public getId() { return this._id; }
-
-    // TreeNode API Delegatiion
-    public getParent<U>() {
-        return this._treeNode.getParent() as StreamT<U>;
+        this._listen();
     }
 
     private _patch<T>(methodName: string, ...args: any[]) {
@@ -36,6 +31,19 @@ class StreamT<T> extends Stream<T> {
         const method = super[methodName]
         const stream = method.apply(this, args);
         return new StreamT<T>(stream, this);
+    }
+
+    private _listen() {
+        const listen$ = this
+            .tap(x => console.log(`[${this.getId()}]`, x))
+            .constant(false);
+    }
+
+    public getId() { return this._id; }
+
+    // TreeNode API Delegatiion
+    public getParent<U>() {
+        return this._treeNode.getParent() as StreamT<U>;
     }
 
     // Creating streams API
