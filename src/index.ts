@@ -1,13 +1,16 @@
 import { justT as just } from "./Tracables/Source/Core"
+import EventBus from "./Infrastructure/EventBus";
+
+EventBus.AddListener((recordEvent) => {
+  console.log(recordEvent);
+})
 
 const just$ = just(0);
 const constant$ = just$.constant(true);
 const map$ = constant$.map(x => !x);
 
-// const listener$ = map$
-//   .tap(x => {
-//     console.log(`[${map$.getId()}]`, x)
-//   })
-//   .constant(false)
-
-map$.observe(x => console.log("map$.observe", x));
+map$.subscribe({
+  next: Function.prototype as any,
+  error: Function.prototype as any,
+  complete: Function.prototype as any
+});

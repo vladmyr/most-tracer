@@ -38,10 +38,11 @@ class EventRecord<TValue> {
         }
     }
 
-    public constructor(id: string, timestamp: number, value: TValue) {
+    public constructor(id: string, value: TValue, error?: Error) {
         this._id = id;
-        this._timestamp = timestamp;
+        this._timestamp = Date.now();
         this._value = value;
+        this._isError = error instanceof Error;
     }
 
     public toJSON() {

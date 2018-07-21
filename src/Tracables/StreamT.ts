@@ -1,10 +1,9 @@
 import { Stream, empty } from "most";
 import * as uuid from "uuid/v4";
 
-import { ofT as of } from "./Source/Core";
-
 import TreeNode from "../Infrastructure/TreeNode";
 import StreamSet from "../Infrastructure/StreamSet";
+import EventBus from "../Infrastructure/EventBus";
 
 type TimeValue<V> = { time: number, value: V };
 
@@ -14,18 +13,17 @@ type TimeValue<V> = { time: number, value: V };
  * 2) Come up with clever typing solution for `getParent` method
  */
 class StreamT<T> extends Stream<T> {
+    private static _eventBus = EventBus;
     private _treeNode: TreeNode<StreamT<T>, StreamT<any> | undefined>;
     private _id: string;
 
     private static _Listen<T>(id: string, stream: Stream<T>) {
         return stream
-            .tap(x => {
-                console.log(`[${id}]`, x)
-            })
-            .recoverWith(e => {
-                console.log(`[${id}] ERROR`, e);
-                return empty();
-            })
+            .tap(x => this._eventBus.Emit(id, x))
+            .recoverWith((e: Error) => {
+                this._eventBus.Emit(id, undefined, e);
+                return stream;
+            });
     }
 
     public static Construct<T>(stream: Stream<T>, parentStreamT?: StreamT<any>): StreamT<T> {
@@ -47,7 +45,6 @@ class StreamT<T> extends Stream<T> {
         // @ts-ignore
         const method = super[methodName]
         const stream = method.apply(this, args);
-        // return new StreamT<T>(stream, this);
         return StreamT.Construct<T>(stream, this);
     }
 
