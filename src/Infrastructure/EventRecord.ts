@@ -9,6 +9,8 @@ class EventRecord<TValue> {
     private _id: string;
     private _timestamp: number;
     private _value: TValue;
+    private _isFinish: boolean;
+    private _isError: boolean;
 
     private static SerializeValue(value: any) {
         const serialized: {

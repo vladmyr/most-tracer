@@ -1,8 +1,13 @@
-import { just } from "./Tracables/Source/Core"
-// import { from }
+import { justT as just } from "./Tracables/Source/Core"
 
-const const$ = just(0)
-  .constant(true)
-  .map(x => !x)
+const just$ = just(0);
+const constant$ = just$.constant(true);
+const map$ = constant$.map(x => !x);
 
-const$.observe(x => console.log("const.observe", x));
+// const listener$ = map$
+//   .tap(x => {
+//     console.log(`[${map$.getId()}]`, x)
+//   })
+//   .constant(false)
+
+map$.observe(x => console.log("map$.observe", x));

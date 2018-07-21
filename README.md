@@ -16,8 +16,8 @@ Visualize and trace your most.js streams
     - [x] `startWith`
     - [x] `concat`
 1. Handling errors
-    - [ ] `recoverWith`, alias `flatMapError`
-    - [ ] `throwError`
+    - [x] `recoverWith`, alias `flatMapError`
+    - [ ] `most.throwError`
 1. Transforming streams
     - [x] `map`
     - [x] `constant`

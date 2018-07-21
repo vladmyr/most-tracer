@@ -1,5 +1,6 @@
-import { Stream, empty } from "most";
+import { Stream } from "most";
 import StreamT from "../../src/Tracables/StreamT";
+import { emptyT as empty} from "../../src/Tracables/Source/Core";
 
 type TResolutionCriteriaTake = {
     take: number
@@ -39,7 +40,7 @@ class StreamTestHelper {
         criteria: TResolutionCriteria = { take: 1 }
     ): Promise<Array<T>> {
         return new Promise((resolve, reject) => {
-            stream.recoverWith(e => { 
+            (stream as StreamT<T>).recoverWith<void>(e => { 
                 reject(e); 
                 return empty(); 
             });
@@ -52,7 +53,7 @@ class StreamTestHelper {
         criteria: TResolutionCriteria = { take: 1 }
     ): Promise<Array<T>> {
         return new Promise((resolve, reject) => {
-            stream.recoverWith(e => { 
+            (stream as StreamT<T>).recoverWith(e => { 
                 reject(e); 
                 return empty(); 
             });

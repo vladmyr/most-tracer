@@ -1,5 +1,7 @@
-import { Stream } from "most";
+import { Stream, empty } from "most";
 import * as uuid from "uuid/v4";
+
+import { ofT as of } from "./Source/Core";
 
 import TreeNode from "../Infrastructure/TreeNode";
 import StreamSet from "../Infrastructure/StreamSet";
@@ -15,28 +17,38 @@ class StreamT<T> extends Stream<T> {
     private _treeNode: TreeNode<StreamT<T>, StreamT<any> | undefined>;
     private _id: string;
 
-    public constructor(stream: Stream<T>, parentStreamT?: StreamT<any>) {
+    private static _Listen<T>(id: string, stream: Stream<T>) {
+        return stream
+            .tap(x => {
+                console.log(`[${id}]`, x)
+            })
+            .recoverWith(e => {
+                console.log(`[${id}] ERROR`, e);
+                return empty();
+            })
+    }
+
+    public static Construct<T>(stream: Stream<T>, parentStreamT?: StreamT<any>): StreamT<T> {
+        const id = uuid();
+        const listened$ = StreamT._Listen(id, stream);
+        return new StreamT<T>(id, listened$, parentStreamT);
+    }
+
+    private constructor(id: string, stream: Stream<T>, parentStreamT?: StreamT<any>) {
         super(stream.source);
         
-        this._id = uuid();
+        this._id = id;
         this._treeNode = new TreeNode(this, parentStreamT);
 
         StreamSet.Add(this);
-
-        this._listen();
     }
 
     private _patch<T>(methodName: string, ...args: any[]) {
         // @ts-ignore
         const method = super[methodName]
         const stream = method.apply(this, args);
-        return new StreamT<T>(stream, this);
-    }
-
-    private _listen() {
-        const listen$ = this
-            .tap(x => console.log(`[${this.getId()}]`, x))
-            .constant(false);
+        // return new StreamT<T>(stream, this);
+        return StreamT.Construct<T>(stream, this);
     }
 
     public getId() { return this._id; }
@@ -66,6 +78,9 @@ class StreamT<T> extends Stream<T> {
     public filter(p: (a: T) => boolean): StreamT<T> { return this._patch("filter", p); }
     public skipRepeats(): StreamT<T> { return this._patch("skipRepeats"); };
     public skipRepeatsWith(eq: (a1: T, a2: T) => boolean): StreamT<T> { return this._patch("skipRepeatsWith", eq); };
+
+    // Error API
+    public recoverWith<U>(p: (a: U) => Stream<T>): StreamT<T> { return this._patch("recoverWith", p); };
 }
 
 export default StreamT;

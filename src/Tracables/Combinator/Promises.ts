@@ -2,10 +2,10 @@ import { fromPromise as _fromPromise, awaitPromises as _awaitPromises } from "mo
 import StreamT from "../StreamT";
 
 const fromPromiseT = <T>(...args: any[]) => 
-    new StreamT<T>(_fromPromise.apply(_fromPromise, args))
+    StreamT.Construct<T>(_fromPromise.apply(_fromPromise, args))
 
 const awaitPromisesT = <T>(...args: any[]) =>
-    new StreamT<T>(_awaitPromises.apply(_awaitPromises, args))
+    StreamT.Construct<T>(_awaitPromises.apply(_awaitPromises, args))
 
 const fromPromise: typeof _fromPromise = fromPromiseT;
 const awaitPromises: typeof _awaitPromises = awaitPromisesT;
