@@ -17,6 +17,7 @@ class StreamT<T> extends Stream<T> {
 
     public constructor(stream: Stream<T>, parentStreamT?: StreamT<any>) {
         super(stream.source);
+        
         this._id = uuid();
         this._treeNode = new TreeNode(this, parentStreamT);
 
@@ -38,9 +39,7 @@ class StreamT<T> extends Stream<T> {
     }
 
     // Creating streams API
-    public startWith(a: T): StreamT<T> {
-        return new StreamT(super.startWith.apply(this, a));
-    }
+    public startWith(a: T): StreamT<T> { return this._patch("startWith", a); }
 
     public concat(s: Stream<T>): StreamT<T> { return this._patch("concat", s); }
 

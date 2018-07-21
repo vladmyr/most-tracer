@@ -19,3 +19,17 @@ test("[most.from] collect iterable", async (t) => {
 
     t.deepEqual(originalResult, patchedResult);
 })
+
+// test("[most.from] listen iterable", async (t) => {
+//     const iterable = [2,3,4,5,6];
+//     const resolutionCriteria = { take: iterable.length };
+    
+//     const iterable$ = fromT<number>(iterable);
+
+//     const listener = StreamTestHelper.Listen(iterable$, resolutionCriteria);
+//     iterable$.observe(Function.prototype as any);
+    
+//     const resolved = await listener;
+
+//     t.deepEqual(resolved.length, iterable.length);
+// })

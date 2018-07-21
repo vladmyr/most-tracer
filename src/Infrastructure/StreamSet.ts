@@ -10,6 +10,10 @@ class StreamSet {
         return this._Set.has(stream);
     }
 
+    public static GetSize() {
+        return this._Set.size;
+    }
+
     private constructor() {}
 }
 

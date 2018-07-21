@@ -1,6 +1,5 @@
 import test from "ava";
-import StreamT from "../../src/Tracables/StreamT";
-import { fromT } from "../../src/Tracables/Source/From"
+import { fromT } from "../../src/Tracables/Source/From";
 
 test("[StreatT] TreeNode - get parent", async(t) => {
     const iterable = [0, 1, 2, 3, 4];

@@ -1,4 +1,5 @@
 import { Stream, empty } from "most";
+import StreamT from "../../src/Tracables/StreamT";
 
 type TResolutionCriteriaTake = {
     take: number
@@ -34,7 +35,7 @@ class StreamTestHelper {
         }
     }
     public static Collect<T>(
-        stream: Stream<T>, 
+        stream: Stream<T> | StreamT<T>, 
         criteria: TResolutionCriteria = { take: 1 }
     ): Promise<Array<T>> {
         return new Promise((resolve, reject) => {
@@ -43,6 +44,19 @@ class StreamTestHelper {
                 return empty(); 
             });
             stream.observe(this._CollectAndResolve(resolve as any, criteria));
+        })
+    }
+
+    public static Listen<T>(
+        stream: Stream<T> | StreamT<T>,
+        criteria: TResolutionCriteria = { take: 1 }
+    ): Promise<Array<T>> {
+        return new Promise((resolve, reject) => {
+            stream.recoverWith(e => { 
+                reject(e); 
+                return empty(); 
+            });
+            stream.tap(this._CollectAndResolve(resolve as any, criteria));
         })
     }
 }

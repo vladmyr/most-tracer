@@ -13,7 +13,3 @@ class TreeNode<T, U> {
 }
 
 export default TreeNode;
-
-// child$.getTreeNode().getParent()
-// child$.getTreeNode().getNode()                                 // === child$
-// child$.getTreeNode().getParent().getTreeNode().getNode()       // === parent$
