@@ -10,7 +10,8 @@ type TimeValue<V> = { time: number, value: V };
 /**
  * TODO:
  * 1) Finish covering API
- * 2) Come up with clever typing solution for `getParent` method
+ * 2) Constructor MUST follow parent argument list
+ * 3) Come up with clever typing solution for `getParent` method
  */
 class StreamT<T> extends Stream<T> {
     private static _eventBus = EventBus;
