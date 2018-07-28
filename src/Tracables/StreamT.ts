@@ -10,8 +10,9 @@ type TimeValue<V> = { time: number, value: V };
 /**
  * TODO:
  * 1) Finish covering API
- * 2) Constructor MUST follow parent argument list
+ * 2) Constructor MUST follow parent argument list - use composition
  * 3) Come up with clever typing solution for `getParent` method
+ * 4) Make `_Listen` method less hacky
  */
 class StreamT<T> extends Stream<T> {
     private static _eventBus = EventBus;
@@ -30,10 +31,10 @@ class StreamT<T> extends Stream<T> {
     public static Construct<T>(stream: Stream<T>, parentStreamT?: StreamT<any>): StreamT<T> {
         const id = uuid();
         const listened$ = StreamT._Listen(id, stream);
-        return new StreamT<T>(id, listened$, parentStreamT);
+        return new StreamT<T>(listened$, id, parentStreamT);
     }
 
-    private constructor(id: string, stream: Stream<T>, parentStreamT?: StreamT<any>) {
+    public constructor(stream: Stream<T>, id: string = "", parentStreamT?: StreamT<any>) {
         super(stream.source);
         
         this._id = id;

@@ -2,7 +2,7 @@ import { justT as just } from "./Tracables/Source/Core"
 import EventBus from "./Infrastructure/EventBus";
 
 EventBus.AddListener((recordEvent) => {
-  console.log(recordEvent);
+  console.log(recordEvent.toJSON());
 })
 
 const just$ = just(0);

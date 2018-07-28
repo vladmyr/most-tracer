@@ -4,9 +4,11 @@
   "description": "Node.js + TypeScript = Node.ts boilerplate",
   "main": "index.ts",
   "dependencies": {
+    "@types/d3": "^5.0.0",
     "@types/node": "^10.3.6",
     "@types/uuid": "^3.4.3",
     "ava-ts": "^0.24.6",
+    "d3": "^5.5.0",
     "most": "^1.7.3",
     "most-subject": "^6.0.0",
     "uuid": "^3.3.2"
