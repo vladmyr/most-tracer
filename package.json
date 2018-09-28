@@ -16,7 +16,8 @@
   "devDependencies": {
     "ava": "^0.25.0",
     "ts-node": "^7.0.0",
-    "typescript": "latest"
+    "typescript": "3.1.1",
+    "webpack": "4.20.2"
   },
   "scripts": {
     "tsc": "./node_modules/.bin/tsc",

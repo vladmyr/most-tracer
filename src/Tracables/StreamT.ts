@@ -22,10 +22,11 @@ class StreamT<T> extends Stream<T> {
     private static _Listen<T>(id: string, stream: Stream<T>) {
         return stream
             .tap(x => this._eventBus.Emit(id, x))
-            .recoverWith((e: Error) => {
-                this._eventBus.Emit(id, undefined, e);
-                return stream;
-            });
+            // TODO: catch error without side effects
+            // .recoverWith((e: Error) => {
+            //     this._eventBus.Emit(id, undefined, e);
+            //     return stream;
+            // });
     }
 
     public static Construct<T>(stream: Stream<T>, parentStreamT?: StreamT<any>): StreamT<T> {

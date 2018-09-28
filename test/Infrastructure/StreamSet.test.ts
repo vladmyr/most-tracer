@@ -3,7 +3,8 @@ import StreamTestHelper from "../Helpers/StreamTestHelper";
 import { fromT } from "../../src/Tracables/Source/From";
 import StreamSet from "../../src/Infrastructure/StreamSet";
 
-test("[StreamSet] Verify every new stream is added to global set", async(t) => {
+test.only("[StreamSet] Verify every new stream is added to global set", async(t) => {
+    const totalSize = 5;
     const iterable = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
     const iterable$ = fromT<number>(iterable);
@@ -13,7 +14,7 @@ test("[StreamSet] Verify every new stream is added to global set", async(t) => {
 
     await Promise.resolve(StreamTestHelper.Collect(const$));
 
-    t.deepEqual(StreamSet.GetSize(), 4);
+    t.deepEqual(StreamSet.GetSize(), totalSize);
     t.true(StreamSet.Has(iterable$));
     t.true(StreamSet.Has(multiplied$));
     t.true(StreamSet.Has(even$));
